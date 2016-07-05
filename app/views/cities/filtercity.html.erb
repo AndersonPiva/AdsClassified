@@ -1,0 +1,43 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="panel panel-default col-xs-12 col-sm-6 col-md-4 margin-post">
+          <div class="panel-body">
+            <div class="text-center">
+              <h4 class="title-color"><strong>Escolha sua cidade:</strong></h4>
+              <% @cities.each do |city| %>
+                <h5><a href="/anuncios/cidade/<%= city.to_param %>"><i class="fa fa-map-marker"></i> <%= city.name %></a></h5>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% carousel_index = 0 %>
+        <% modal_index = 0 %>
+        <% if @advertisements.blank? %>
+          <div class="panel panel-default col-xs-12 col-sm-personal col-md-personal">
+            <div class="panel-body">
+              <h4 class="title-color">Ainda não existe nenhum anúncio postado em <strong><%= @city.name %></strong> <i class="fa fa-thumbs-o-down"></i>.</h4>
+            </div>
+          </div>
+        <% else %>
+        <div class="panel panel-default col-xs-12 col-sm-personal col-md-personal margin-post">
+          <div class="panel-body">
+            <h2 class="title-color no-margin-no-padding">Anúncios em <strong><%= @city.name %></strong></h2>
+          </div>
+        </div>
+        <div class="advertisements">
+          <%= render partial: 'advertisements/adspartial', locals: {advertisements: @advertisements} %>
+        </div>
+        <% end %>
+        <% if @advertisements.next_page %>
+        <div class="col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+          <a class="load-more-advertisements" data-remote="true" href="/anuncios/cidade/<%= @city.to_param %>?page=<%= @advertisements.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

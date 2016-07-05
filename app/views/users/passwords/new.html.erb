@@ -1,0 +1,33 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="panel panel-default col-xs-12 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-personal panel-margin">
+        <div class="panel-body">
+          <div class="text-center">
+            <h4 class="title-color">
+              <strong>Redefinição de Senha</strong>
+            </h4>
+            <img alt="password-recovery" class="img-circle img-margin" src="/assets/password-recovery.jpg"/>
+          </div>
+          <p>
+            Você receberá um e-mail para dar sequência ao processo de redefinição de senha.
+          </p>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="form-group input-group">
+            <label class="input-group-addon" for="e-mail">
+              <i class="fa fa-envelope"></i>
+            </label>
+            <%= f.email_field :email, autofocus: true, :placeholder => 'Digite o e-mail da sua conta', class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Enviar-me e-mail</button>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

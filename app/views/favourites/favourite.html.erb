@@ -1,0 +1,33 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <h1 class="text-uppercase title-color hidden-xs">meus favoritos</h1>
+      <h4 class="text-uppercase title-color visible-xs">meus favoritos</h4>
+      <div class="page-content">
+        <% if @favourites.blank? %>
+        <div class="panel panel-default col-xs-12">
+          <div class="panel-body">
+            <h4 class="title-color">Você ainda não possui nenhum favorito
+              <i class="fa fa-thumbs-o-down"></i>.</h4>
+            <h4 class="title-color">Procure
+              <a href="/usuarios/<%= current_user.to_param %>/timeline">agora</a>
+              mesmo por anúncios do seu interesse
+              <i class="fa fa-thumbs-o-up"></i>.</h4>
+          </div>
+        </div>
+        <% else %>
+        <div class="advertisements">
+          <%= render partial: 'advertisements/adspartial', locals: {advertisements: @advertisements} %>
+        </div>
+        <% end %>
+        <% if @advertisements.next_page %>
+        <div class="col-xs-12 col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+          <a class="load-more-advertisements" data-remote="true" href="/usuarios/<%= @user.to_param %>/favoritos?page=<%= @advertisements.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

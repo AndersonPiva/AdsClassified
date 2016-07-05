@@ -1,0 +1,9 @@
+<div class="nested-fields">
+  <div class="col-xs-12 col-md-3 pull-left">
+    <div id="div_file">
+    <img alt="img_default" src="/assets/camera-plus.png" id="img_prev" />
+    <%= link_to_remove_association '', f, title: 'Remover', class: "fa fa-times-circle", :id => 'delete-photo' %>
+    <%= f.file_field :cover, as: :file, class:'btn_enviar', :onchange => 'readURL(this);'%>
+    </div>
+  </div>
+</div>

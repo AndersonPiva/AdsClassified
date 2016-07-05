@@ -1,0 +1,43 @@
+<% users.each do |user| %>
+<div class="panel panel-default col-xs-12 col-sm-personal-more pull-right margin-post">
+  <div class="panel-body">
+    <% if user.uid.present? %>
+      <a href="/usuarios/<%= user.to_param %>" title="Ver perfil">
+        <%= image_tag "http://graph.facebook.com/#{user.uid}/picture?type=normal", class: 'img-thumbnail' %>
+        <div class="col-xs-8 col-sm-9 col-lg-10 pull-right">
+          <div class="margin-negative">
+            <h4 class="title-color no-margin-no-padding pull-left"><strong><%= user.name %></strong></h4>
+            </a>
+            <% if current_user.present? %>
+              <% if current_user.id != user.id %>
+                <% if current_user.following?(user) %>
+                    <a href="/usuarios/unfollow/<%= user.id %>" class="btn btn-danger pull-right"><i class="fa fa-remove"></i> Deixar de Seguir</a>
+                <% else %>
+                    <a href="/usuarios/follow/<%= user.id %>" class="btn btn-primary pull-right"><i class="fa fa-plus-circle"></i> Seguir</a>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+    <% else %>
+    <a href="/usuarios/<%= user.to_param %>" title="Ver perfil">
+        <%= image_tag user.image %>
+        <div class="col-xs-8 col-sm-9 col-lg-10 pull-right">
+          <div class="margin-negative">
+            <h4 class="title-color no-margin-no-padding pull-left"><strong><%= user.name %></strong></h4>
+            </a>
+            <% if current_user.present? %>
+              <% if current_user.id != user.id %>
+                <% if current_user.following?(user) %>
+                    <a href="/usuarios/unfollow/<%= user.id %>" class="btn btn-danger pull-right"><i class="fa fa-remove"></i> Deixar de Seguir</a>
+                <% else %>
+                    <a href="/usuarios/follow/<%= user.id %>" class="btn btn-primary pull-right"><i class="fa fa-plus-circle"></i> Seguir</a>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

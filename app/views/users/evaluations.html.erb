@@ -1,0 +1,183 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="panel panel-default col-xs-12">
+          <div class="panel-body">
+            <div class="text-center">
+              <h2 class="title-color"><i class="fa fa-suitcase"></i> <% if current_user.present? && @user.id == current_user.id %> Sua <% end %>  Reputação como anunciante</h2>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <div class="text-center">
+                <h1 class="title-color" id="media"><%= @media %></h1>
+                <div id="stars-center">
+                    <span class="stars"><%= @media %></span>
+                </div>
+                <h5 class="title-color"><i class="fa fa-user"></i> <strong><%= @total_evaluations %></strong> total</h5>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <div class="panel-body">
+                <%= bar_chart ({'5 estrelas' => @total_five, '4 estrelas' => @total_four, '3 estrelas' => @total_three, '2 estrelas' => @total_two, '1 estrela' => @total_one}) %>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <hr/>
+            </div>
+            <div class="page-content">
+              <div class="text-center">
+                <h2 class="no-margin-no-padding title-color"><i class="fa fa-star"></i> Qualificações</h2>
+                <h5 class="title-color" ><i class="fa fa-user"></i> <%=  @total_evaluations %> total</h5>
+              </div>
+              <% if current_user.present? && current_user.id != @user.id %>
+                <% if @evaluation_current_user.blank? %>
+                  <div class="page-content" id="my-evaluation">
+                    <%= render partial: 'evaluations/form', locals: {:@evaluation => Evaluation.new, :@user => @user} %>
+                  </div>
+                <% else %>
+                  <div class="page-content" id="my-evaluation">
+                      <div class="text-center">
+                        <h4 class="title-color"><strong>Minha qualificação</strong></h4>
+                      </div>
+                      <%= render partial: 'evaluations/evaluationpartial', locals: {evaluation: @evaluation_current_user} %>
+                  </div>
+                <% end %>
+              <% end %>
+              <div class="page-content visible-xs">
+                <div class="text-center">
+                  <h5 class="title-color"><i class="fa fa-comment"></i> Qualificações e comentários</h5>
+                </div>
+              </div>
+              <ul class="list-unstyled nav nav-pills nav-justified" id="list-evaluations">
+                <li class="active">
+                  <a href="#all" data-toggle="tab">Todas</a>
+                </li>
+                <li>
+                  <a href="#five" data-toggle="tab"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a>
+                </li>
+                <li>
+                  <a href="#four" data-toggle="tab"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a>
+                </li>
+                <li>
+                  <a href="#three" data-toggle="tab"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a>
+                </li>
+                <li>
+                  <a href="#two" data-toggle="tab"><i class="fa fa-star"></i><i class="fa fa-star"></i></a>
+                </li>
+                <li>
+                  <a href="#one" data-toggle="tab"><i class="fa fa-star"></i></a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="all">
+                    <div class="panel panel-default col-xs-12">
+                      <div class="panel-body">
+                        <% if @evaluations.blank? %>
+                          <% if current_user.present? && @user.id == current_user.id %>
+                              <h4 class="title-color">Você ainda não recebeu nenhuma qualificação.</h4>
+                          <% else %>
+                              <h4 class="title-color">Este anunciante ainda não recebeu nenhuma qualificação.</h4>
+                          <% end %>
+                        <% else %>
+                          <% @evaluations.each do |evaluation|%>
+                            <%= render partial: 'evaluations/evaluationpartial', locals: {evaluation: evaluation} %>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="five">
+                  <div class="panel panel-default col-xs-12">
+                    <div class="panel-body">
+                      <% if @evaluations_five.blank? %>
+                        <% if current_user.present? && @user.id == current_user.id %>
+                            <h4 class="title-color">Você ainda não recebeu nenhuma qualificação 5 estrelas.</h4>
+                        <% else %>
+                            <h4 class="title-color">Este anunciante ainda não recebeu nenhuma qualificação 5 estrelas.</h4>
+                        <% end %>
+                      <% else %>
+                        <% @evaluations_five.each do |evaluation| %>
+                          <%= render partial: 'evaluations/evaluationpartial', locals: {evaluation: evaluation} %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="four">
+                  <div class="panel panel-default col-xs-12">
+                    <div class="panel-body">
+                      <% if @evaluations_four.blank? %>
+                        <% if current_user.present? && @user.id == current_user.id %>
+                            <h4 class="title-color">Você ainda não recebeu nenhuma qualificação 4 estrelas.</h4>
+                        <% else %>
+                            <h4 class="title-color">Este anunciante ainda não recebeu nenhuma qualificação 4 estrelas.</h4>
+                        <% end %>
+                      <% else %>
+                        <% @evaluations_four.each do |evaluation| %>
+                          <%= render partial: 'evaluations/evaluationpartial', locals: {evaluation: evaluation} %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="three">
+                  <div class="panel panel-default col-xs-12">
+                    <div class="panel-body">
+                      <% if @evaluations_three.blank? %>
+                        <% if current_user.present? && @user.id == current_user.id %>
+                            <h4 class="title-color">Você ainda não recebeu nenhuma qualificação 3 estrelas.</h4>
+                        <% else %>
+                            <h4 class="title-color">Este anunciante ainda não recebeu nenhuma qualificação 3 estrelas.</h4>
+                        <% end %>
+                      <% else %>
+                          <% @evaluations_three.each do |evaluation| %>
+                            <%= render partial: 'evaluations/evaluationpartial', locals: {evaluation: evaluation} %>
+                          <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="two">
+                  <div class="panel panel-default col-xs-12">
+                    <div class="panel-body">
+                      <% if @evaluations_two.blank? %>
+                        <% if current_user.present? && @user.id == current_user.id %>
+                            <h4 class="title-color">Você ainda não recebeu nenhuma qualificação 2 estrelas.</h4>
+                        <% else %>
+                            <h4 class="title-color">Este anunciante ainda não recebeu nenhuma qualificação 2 estrelas.</h4>
+                        <% end %>
+                      <% else %>
+                          <% @evaluations_two.each do |evaluation| %>
+                            <%= render partial: 'evaluations/evaluationpartial', locals: {evaluation: evaluation} %>
+                          <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="one">
+                  <div class="panel panel-default col-xs-12">
+                    <div class="panel-body">
+                      <% if @evaluations_one.blank? %>
+                        <% if current_user.present? && current_user.id == @user.id %>
+                            <h4 class="title-color">Você ainda não recebeu nenhuma qualificação 1 estrela.</h4>
+                        <% else %>
+                            <h4 class="title-color">Este anunciante ainda não recebeu nenhuma qualificação 1 estrela.</h4>
+                        <% end %>
+                      <% else %>
+                        <% @evaluations_one.each do |evaluation| %>
+                          <%= render partial: 'evaluations/evaluationpartial', locals: {evaluation: evaluation} %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

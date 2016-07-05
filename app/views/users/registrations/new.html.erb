@@ -1,0 +1,99 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="col-sm-6 hidden-xs page-content">
+        <img alt="bussines-icon" id="business-icon" src="/assets/business-icon.png"/>
+      </div>
+      <div class="col-xs-12 col-sm-6 page-content">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="text-center">
+              <h3 class="hidden-xs hidden-sm title-color">Crie sua conta agora mesmo, é gratuito!</h3>
+              <h5 class="visible-xs visible-sm title-color">
+                <strong>Crie sua conta agora mesmo, é gratuito!</strong>
+              </h5>
+              <p>
+                Veja todos os anúncios da região. Através de nosso serviço de usabilidade simples e prática gerencie seus próprios anúncios por meio de um perfil personalizado.
+              </p>
+            </div>
+            <div class="col-xs-10 col-xs-offset-1 page-content">
+              <div class="panel-body">
+                <%= form_for(resource, :html => {multipart: true}, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= devise_error_messages! %>
+                <div class="form-group input-group">
+                  <label class="input-group-addon" for="email">
+                    <i class="fa fa-envelope"></i>
+                  </label>
+                  <%= f.email_field :email, autofocus: true, :placeholder => 'Email', class: 'form-control' %>
+                </div>
+                <div class="form-group input-group">
+                  <label class="input-group-addon" for="senha">
+                    <i class="fa fa-lock"></i>
+                  </label>
+                  <%= f.password_field :password, autocomplete: "off", :placeholder => 'Senha', class: 'form-control', :id => 'password' %>
+                </div>
+                <div id="pswd_info">
+                  <h5><strong>Dica:</strong> Crie uma senha forte <a href="#" title="Porque devo criar uma senha forte?" class="btn btn-default btn-xs"><i class="fa fa-question"></i></a>. Inclua:</h5>
+                  <ul class="list-unstyled">
+                    <li class="invalid" id="letter">
+                      Pelo menos
+                      <strong>uma letra</strong>.
+                    </li>
+                    <li class="invalid" id="capital">
+                      Pelo menos
+                      <strong>uma letra maiúscula</strong>.
+                    </li>
+                    <li class="invalid" id="number">
+                      Pelo Menos
+                      <strong>um número</strong>.
+                    </li>
+                    <li class="invalid" id="length">
+                      Pelo menos
+                      <strong>6 caracteres</strong>.
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group input-group">
+                  <label class="input-group-addon" for="password-confirmation">
+                    <i class="fa fa-refresh"></i>
+                  </label>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => 'Repetição de Senha', class: 'form-control' %>
+                </div>
+                <div class="form-group input-group">
+                <label for="kind" class="input-group-addon">Seu perfil é?</label>
+                    <%= f.select(:kind, options_for_select([['Pessoal'], ['Profissional']]), {}, {class: "form-control"}) %>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block" type="submit">Criar Conta</button>
+                </div>
+                <p class="text-center">
+                  ou
+                </p>
+                <div class="form-group">
+                  <a class="btn btn-block btn-social btn-facebook" href="/users/auth/facebook" id="load">
+                    <i class="fa fa-facebook"></i>Entrar usando o Facebook</a>
+                  <div class="text-center" id="carregando">
+                    <img src="/assets/loader.gif"/>
+                    <span>
+                      <small>Carregando...</small>
+                    </span>
+                  </div>
+                </div>
+                <p class="line-height text-center">
+                  <small>Ao se cadastrar, você automaticamente concorda com os
+                    <a href="#">termos de uso</a>
+                    e a
+                    <a href="#">política de privacidade</a>
+                    do Grande Oeste Classificados, e também em receber e-mails comunicativos do nosso serviço.</small>
+                </p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

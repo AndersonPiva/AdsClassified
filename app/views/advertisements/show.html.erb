@@ -1,0 +1,316 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="panel panel-default col-xs-12">
+          <div class="panel-body">
+            <h5 class="title-color pull-right">Anúncio #<%= @advertisement.id %></h5>
+            <hr class="clear"/>
+            <div class="text-center">
+              <h1 class="title-color">
+                <strong><%= @advertisement.title %></strong>
+              </h1>
+              <h1 id="advertisement-price" title="Preço">
+                <i class="fa fa-money"></i>
+                R$
+                <%= @advertisement.price %></h1>
+              <h5 class="title-color">
+                <i class="fa fa-tag"></i>
+                <%= @advertisement.kind %>
+                |
+                <% if @advertisement.user.kind == "Pessoal" %>
+                <i class="fa fa-ticket"></i>
+                Anúncio pessoal
+                <% else %>
+                <i class="fa fa-ticket"></i>
+                Anúncio de empresa
+                <% end %>
+              </h5>
+              <h5 class="title-color">
+                <i class="fa fa-calendar"></i>
+                Inserido em:
+                <%= @advertisement.created_at.strftime("%d/%m/%Y %H:%M") %>.</h5>
+            </div>
+            <div class="page-content">
+              <% if !@images.blank? %>
+              <div class="col-xs-12 col-md-7 col-lg-8">
+                <div class="row">
+                  <div class="col-xs-12" id="slider">
+                    <div class="row">
+                      <div class="col-xs-12" id="carousel-bounding-box">
+                        <div class="carousel slide" id="myCarousel">
+                          <div class="carousel-inner">
+                            <% i = 0 %>
+                            <% @images.each do |image| %>
+                            <% if i == 0 %>
+                            <div class="active item">
+                              <%= image_tag image.cover %></div>
+                            <% i = i+1 %>
+                            <% else %>
+                            <div class="item">
+                              <%= image_tag image.cover %></div>
+                            <% end %>
+                            <% end %>
+                          </div>
+                          <a class="left carousel-control" data-slide="prev" href="#myCarousel>" role="button">
+                            <h1 class="fa fa-chevron-left fa-3x chevron-margin"></h1>
+                          </a>
+                          <a class="right carousel-control" data-slide="next" href="#myCarousel" role="button">
+                            <h1 class="fa fa-chevron-right fa-3x chevron-margin"></h1>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="hidden-xs" id="slider-thumbs">
+                    <ul class="hide-bullets">
+                      <% number = 0 %>
+                      <% @images.each do |image| %>
+                      <li class="col-sm-4">
+                        <a class="thumbnail" id="carousel-selector-<%=number%>"><%= image_tag image.cover %></a>
+                      </li>
+                      <% number = number+1%>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <% else %>
+              <div class="col-xs-12 col-md-7 col-lg-8">
+                <div class="panel-body">
+                  <div class="text-center">
+                    <% if current_user.present? %>
+                    <h3 class="title-color" id="dont-image">
+                      <strong>Este anúncio não possui nenhuma imagem.</strong>
+                    </h3>
+                    <% else %>
+                    <h3 class="title-color" id="image-dont">
+                      <strong>Este anúncio não possui nenhuma imagem.</strong>
+                    </h3>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+              <div class="col-xs-12 col-md-5 col-lg-4 panel-message-advertisement">
+                <div class="text-center">
+                  <h5 class="title-color">
+                    <strong>
+                      <i class="fa fa-envelope"></i>
+                      Envie uma mensagem para este anúnciante</strong>
+                  </h5>
+                  <div class="margin-message">
+                    <a href="/usuarios/<%= @advertisement.user.to_param %>" title="Ver Perfil">
+                      <%= image_tag @advertisement.user.image %>
+                      <span class="title-color"><%= @advertisement.user.name %></span>
+                    </a>
+                    <% if @advertisement.user.phone.present?%>
+                    <h5 class="title-color">
+                      <i class="fa fa-phone-square fa-2x" title="Telefone"></i>
+                      <%= @advertisement.user.phone %></h5>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="margin-message">
+                  <% if current_user.present? %>
+                  <%= render partial: 'messages/form', locals:{:@message => Message.new, user: @advertisement.user} %>
+                  <% else %>
+                  <h4 class="title-color text-center">Logue para poder mandar uma mensagem para este anunciante.</h4>
+                  <% end %>
+                </div>
+              </div>
+              <hr class="col-xs-12"/>
+              <div class="page-content">
+                <div class="panel panel-default col-xs-12 col-md-5 col-lg-4 pull-right clear" id="panel-options">
+                  <div class="panel-body">
+                    <h4 class="title-color text-center">
+                      <strong>
+                        <i class="fa fa-tags"></i>
+                        Opções</strong>
+                    </h4>
+                    <div class="col-xs-5 text-center">
+                      <h5 class="title-color margin-options">
+                        <strong>
+                          <i class="fa fa-heart"></i>
+                          Favoritos</strong>
+                      </h5>
+                      <% if current_user.present? %>
+                      <% if current_user.id != @advertisement.user.id %>
+                      <% if current_user.favourites.map(&:advertisement_id).include?(@advertisement.id) %>
+                      <a class="btn btn-danger" href="/usuarios/removeFavourite/<%= @advertisement.id %>" title="Remover dos favoritos">
+                        <i class="fa fa-remove"></i>
+                      </a>
+                      <% else %>
+                      <a class="btn btn-primary" href="/usuarios/addFavourite/<%= @advertisement.id %>" title="Adicionar aos Favoritos">
+                        <i class="fa fa-plus-circle"></i>
+                      </a>
+                      <% end %>
+                      <% else %>
+                      <i class="fa fa-star fa-2x title-color" title="Você não pode adicionar seu próprio anúncio aos favoritos."></i>
+                      <% end %>
+                      <% else %>
+                      <i class="fa fa-star fa-2x title-color" title="Logue para adicionar este anúncio aos seus favoritos."></i>
+                      <% end %>
+                    </div>
+                    <div class="col-xs-7 text-center">
+                      <h5 class="title-color margin-options">
+                        <strong>
+                          <i class="fa fa-share"></i>
+                          Compartilhar</strong>
+                      </h5>
+                      <a class="btn btn-social-icon btn-facebook" href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u=http://fazer-site.net','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');">
+                        <i class="fa fa-facebook"></i>
+                      </a>
+                      <a class="btn btn-social-icon btn-twitter" href="javascript: void(0);" onclick="window.open('https://twitter.com/intent/tweet?original_referer=http://fazer-site.net&source=tweetbutton&text=Fazer Site - Dicas Web&url=http://fazer-site.net','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                      <a class="btn-whatsapp" href="">
+                        <img alt="whatsapp-icon" src="/assets/whatsapp.png"/>
+                      </a>
+                    </div>
+                    <hr class="col-xs-11"/>
+                    <div class="col-xs-4 text-center">
+                      <% if current_user.present? %>
+                      <% if current_user.id == @advertisement.user.id %>
+                      <a data-target="#modalEditAdsShow" data-toggle="modal" href="">
+                        <h5 class="title-color no-margin-no-padding margin-options">
+                          <strong>Editar</strong>
+                        </h5>
+                        <i class="fa fa-pencil fa-2x title-color"></i>
+                      </a>
+                      <% else %>
+                      <h5 class="title-color no-margin-no-padding margin-options" title="Você não pode editar um anúncio que não é seu.">
+                        <strong>Editar</strong>
+                      </h5>
+                      <i class="fa fa-pencil fa-2x title-color" title="Você não pode ediatar um anúncio que não é seu."></i>
+                      <% end %>
+                      <% else %>
+                      <h5 class="title-color no-margin-no-padding margin-options" title="Logue para editar este anúncio">
+                        <strong>Editar</strong>
+                      </h5>
+                      <i class="fa fa-pencil fa-2x title-color" title="Logue para editar este anúncio"></i>
+                      <% end %>
+                    </li>
+                  </div>
+                  <div class="modal fade" id="modalEditAdsShow" role="dialog">
+                    <%= render partial: 'advertisements/edit', locals: {:@advertisement => @advertisement} %>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a data-confirm="Tem Certeza?" href="/anuncios/excluirads/<%= @advertisement.id %>">
+                      <h5 class="title-color no-margin-no-padding margin-options">
+                        <strong>Excluir</strong>
+                      </h5>
+                      <i class="fa fa-remove fa-2x title-color"></i>
+                    </a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <% if @advertisement.status == "a venda" %>
+                    <a data-confirm="Tem certeza?" href="/anuncios/vender/<%= @advertisement.id %>" title="Marcar como vendido">
+                      <h5 class="title-color no-margin-no-padding margin-options">
+                        <strong>Vender</strong>
+                      </h5>
+                      <i class="fa fa-gavel fa-2x title-color"></i>
+                    </a>
+                    <% else %>
+                    <h5 class="title-color no-margin-no-padding margin-options">
+                      <strong>Vendido</strong>
+                    </h5>
+                    <i class="fa fa-check-square-o fa-2x title-color" title="Este artigo já foi vendido"></i>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-7 col-lg-8">
+                <h4 class="title-color no-margin-no-padding">Preço:
+                  <strong>R$
+                    <%= @advertisement.price %></strong>
+                  <% if @advertisement.negotiable.present? %>
+                  |
+                  <i class="fa fa-check"></i>
+                  Preço negociável
+                  <% end %></h4>
+                <% if @advertisement.description.present? %>
+                <div class="margin-message">
+                  <p class="title-color">
+                    <%= @advertisement.description %>
+                  </p>
+                </div>
+                <% end %>
+                <div class="margin-message">
+                  <h4 class="title-color">Localização</h4>
+                  <ul class="ads-location">
+                    <li>
+                      <span class="title-color">Cidade:
+                        <strong>
+                          <a href="/anuncios/cidade/<%= @advertisement.user.city.to_param %>"><%= @advertisement.user.city.name %></a>
+                        </strong>
+                      </span>
+                    </li>
+                    <li>
+                      <span class="title-color">Endereço:
+                        <strong><%= @advertisement.user.address %></strong>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="margin-message">
+                  <h4 class="title-color">Informações sobre o Anunciante</h4>
+                  <ul class="ads-location">
+                    <li>
+                      <span class="title-color">Nome:
+                        <a href="/usuarios/<%= @advertisement.user.to_param %>" title="Ver Perfil">
+                          <strong><%= @advertisement.user.name %></strong>
+                        </a>
+                      </span>
+                    </li>
+                    <li>
+                      <span class="title-color">Total de Anúncios:
+                        <a href="/usuarios/<%= @advertisement.user.to_param%>/anuncios" title="Clique para ver todos os anúncios">
+                          <strong><%= @advertisement.user.advertisements.size %></strong>
+                        </a>
+                      </span>
+                    </li>
+                    <li>
+                      <span class="title-color">Anunciante desde:
+                        <strong><%= l(@advertisement.user.created_at, format: "%d de %B de %Y") %></strong>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="margin-message">
+                  <span class="title-color">Código do anúncio:
+                    <strong><%= @advertisement.id %></strong>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default col-xs-12 col-md-5 col-lg-4 pull-right" id="panel-security">
+              <div class="panel-body">
+                <div class="text-center">
+                  <h5 class="title-color">
+                    <strong>
+                      <i class="fa fa-question-circle"></i>
+                      Dicas de segurança</strong>
+                  </h5>
+                </div>
+                <ul class="ads-location">
+                  <li>
+                    <span class="title-color">Analise as qualificações do anunciante.</span>
+                  </li>
+                  <li>
+                    <span class="title-color">Não acredite em anúncios surreais.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'publics/footerpublics' %>
+</div>

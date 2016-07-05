@@ -1,0 +1,91 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="panel panel-deault col-xs-12 col-sm-3">
+          <div class="panel-body">
+            <ul class="list-unstyled nav nav-pills nav-justified" id="list-search">
+              <li class="title-color text-uppercase">
+                <strong>tipo de resultado</strong>
+              </li>
+              <li class="active">
+                <a class="title-color" data-toggle="tab" href="#Users">
+                  <i class="fa fa-users"></i>Usuários</a>
+              </li>
+              <li>
+                <a class="title-color" data-toggle="tab" href="#Ads">
+                  <i class="fa fa-ticket"></i>Anúncios</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <% if flash[:notice] != nil %>
+        <div class="panel panel-default col-xs-12 col-sm-personal-more">
+          <div class="panel-body">
+            <strong class="title-color">Por favor, insira uma consulta na caixa de pesquisa.</strong>
+          </div>
+        </div>
+        <% else %>
+        <div class="tab-content">
+          <div class="tab-pane active" id="Users">
+            <% if @users.blank? %>
+            <div class="panel panel-default col-xs-12 col-sm-personal-more">
+              <div class="panel-body">
+                <h4 class="title-color">
+                  <strong>Infelizmente não existem usuários que coincidam com a sua busca.</strong>
+                </h4>
+                <ul>
+                  <li class="title-color">
+                    Revise se a ortografia do termo buscado está correta.
+                  </li>
+                  <li class="title-color">
+                    Tenha certeza que o usuário realmente existe.
+                  </li>
+                  <li class="title-color">
+                    Tente novamente.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <% else %>
+            <% @users.each do |user| %>
+            <%= render partial: '/users/userpartial', locals: {user:user} %>
+            <% end %>
+            <% end %>
+          </div>
+          <div class="tab-pane" id="Ads">
+            <% if @advertisements.blank? %>
+            <div class="panel panel-default col-xs-12 col-sm-personal-more">
+              <div class="panel-body">
+                <h4 class="title-color">
+                  <strong>Infelizmente não existem anúncios que coincidam com a sua busca.</strong>
+                </h4>
+                <ul>
+                  <li class="title-color">
+                    Revise se a ortografia do termo buscado está correta.
+                  </li>
+                  <li class="title-color">
+                    Tenha certeza que o anúncio realmente existe.
+                  </li>
+                  <li class="title-color">
+                    Tente novamente.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <% else %>
+            <% @advertisements.each do |advertisement| %>
+            <div class="panel panel-default col-xs-12 col-sm-personal-more">
+              <div class="panel-body"></div>
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

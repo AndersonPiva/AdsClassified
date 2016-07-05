@@ -1,0 +1,33 @@
+<%= simple_form_for(@message) do |f| %>
+<%= f.error_notification %>
+<div class="form-group input-group">
+  <label class="input-group-addon" for="name">
+    <i class="fa fa-user"></i>
+  </label>
+  <%= f.text_field :name, :placeholder => 'Seu nome', value: current_user.name, class: 'form-control' %>
+</div>
+<div class="form-group input-group">
+  <label class="input-group-addon" for="email">
+    <i class="fa fa-envelope"></i>
+  </label>
+  <%= f.email_field :email, :placeholder => 'Seu e-mail', value: current_user.email, class: 'form-control' %>
+</div>
+<div class="form-group hidden-xs hidden-sm hidden-md hidden-lg hidden-xl">
+  <%= f.text_field :receiver_id, value: user.receiver.id, :readonly => 'true' %>
+</div>
+<div class="form-group input-group">
+  <label class="input-group-addon" for="phone">
+    <i class="fa fa-phone-square"></i>
+  </label>
+  <%= f.text_field :phone, :placeholder => 'Seu telefone (opcional)', class: 'form-control' %>
+</div>
+<div class="form-group input-group">
+  <label class="input-group-addon" for="comment">
+    <i class="fa fa-comments"></i>
+  </label>
+  <%= f.text_area :comment, :placeholder => 'Mensagem', class: 'form-control', :id => 'message-area' %>
+</div>
+<div class="form-group">
+  <button class="btn btn-primary btn-block" type="submit">Enviar Mensagem</button>
+</div>
+<% end %>

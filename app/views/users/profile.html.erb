@@ -1,0 +1,160 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="panel panel-default col-xs-12 col-sm-6 col-md-4 margin-post">
+          <div class="panel-body">
+            <div class="text-center">
+              <% if @user.uid.present? %>
+              <%= image_tag "http://graph.facebook.com/#{@user.uid}/picture?type=large", class: 'img-thumbnail' %>
+              <h4 class="title-color">
+                <strong><%= @user.name %></strong>
+              </h4>
+              <% else %>
+              <%= image_tag @user.image, class: 'img-thumbnail', :id => 'img-default' %>
+              <% if @user.name.present? %>
+              <h4 class="title-color">
+                <strong><%= @user.name %></strong>
+              </h4>
+              <% else %>
+              <h4 class="title-color">
+                <strong><%= @user.username %></strong>
+              </h4>
+              <% end %>
+              <% end %>
+              <% if current_user.present? %>
+              <% if current_user.id != @user.id %>
+              <% if current_user.following?(@user) %>
+              <a class="btn btn-danger btn-personal" href="/usuarios/unfollow/<%= @user.id %>">
+                <i class="fa fa-remove"></i>
+                Deixar de Seguir</a>
+              <% else %>
+              <a class="btn btn-primary btn-personal" href="/usuarios/follow/<%= @user.id %>">
+                <i class="fa fa-plus-circle"></i>
+                Seguir</a>
+              <% end %>
+              <% end %>
+              <% end %>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="/usuarios/<%= @user.to_param %>/anuncios">
+                <h5>Anúncios</h5>
+                <h4 class="title-color">
+                  <strong><%= @user.advertisements.size %></strong>
+                </h4>
+              </a>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="/usuarios/<%= @user.to_param %>/seguidores">
+                <h5>Seguidores</h5>
+                <h4 class="title-color">
+                  <strong><%= @user.followers_count %></strong>
+                </h4>
+              </a>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="/usuarios/<%= @user.to_param %>/seguindo">
+                <h5>Seguindo</h5>
+                <h4 class="title-color">
+                  <strong><%= @user.follow_count %></strong>
+                </h4>
+              </a>
+            </div>
+            <div class="col-xs-12 text-center">
+              <h4 class="title-color">
+                <strong>Reputação</strong>
+              </h4>
+              <h1 class="title-color" id="title-reputation"><%= @media %></h1>
+              <div id="stars-center">
+                <span class="stars"><%= @media %></span>
+              </div>
+              <% if current_user.present? && current_user.id == @user.id %>
+              <a href="/usuarios/<%= @user.to_param %>/qualificacoes" target="_blank">
+                <i class="fa fa-eye"></i>
+                Ver Minhas qualificações</a>
+              <% else %>
+              <a href="/usuarios/<%= @user.to_param %>/qualificacoes" target="_blank">
+                <i class="fa fa-eye"></i>
+                Ver qualificações deste anúnciante</a>
+              <% end %>
+            </div>
+            <div class="col-xs-12 text-center" id="about-user">
+              <% if @user.description.present? %>
+              <h5 class="title-color">
+                <i class="fa fa-pencil"></i>
+                <%= @user.description %>
+              </h5>
+              <% end %>
+              <h5 class="title-color">
+                <i class="fa fa-user"></i>
+                Perfil
+                <%= @user.kind %></h5>
+              <% if @user.phone.present? %>
+              <h5 class="title-color">
+                <i class="fa fa-phone-square"></i>
+                <%= @user.phone %></h5>
+              <% end %>
+              <% if @user.address.present? %>
+              <h5 class="title-color">
+                <i class="fa fa-globe"></i>
+                <%= @user.address %></h5>
+              <% end %>
+              <% if @user.city.present? %>
+              <h5 class="title-color">
+                <i class="fa fa-map-marker"></i>
+                <%= @user.city.name %></h5>
+              <% end %>
+              <h5 class="title-color">
+                <i class="fa fa-calendar"></i>
+                Participante desde
+                <%= @user.confirmed_at.strftime("%d")%>
+                de
+                <%= l(@user.confirmed_at, format: '%B') %>
+                de
+                <%= @user.confirmed_at.strftime("%Y") %>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <% if @advertisements.blank? %>
+        <div class="panel panel-default col-xs-12 col-sm-personal col-md-personal margin-post">
+          <div class="panel-body">
+            <% if @user.id == current_user.id  %>
+            <h4 class="title-color">Você ainda não publicou nenhum anúncio
+              <i class="fa fa-thumbs-o-down"></i>.</h4>
+            <h4 class="title-color">Comece
+              <a href="/usuarios/<%= @user.to_param %>/timeline">agora a mesmo</a>
+              a publicar seus anúncios para divulgar seus produtos e serviços
+              <i class="fa fa-thumbs-o-up"></i>
+              .</h4>
+            <% else %>
+            <h4 class="title-color">Este usuário ainda não tem nenhuma publicação de anúncio
+              <i class="fa fa-thumbs-o-down"></i>.</h4>
+            <h4 class="title-color">
+              <a href="#">Ajude-o</a>
+              demonstrando seu interresse por sua prublicidade
+              <i class="fa fa-thumbs-o-up"></i>.</h4>
+            <% end %>
+          </div>
+        </div>
+        <% else %>
+        <div class="panel panel-default col-xs-12 col-sm-personal col-md-personal margin-post">
+          <div class="panel-body">
+            <h2 class="title-color no-margin-no-padding">Postagens</h2>
+          </div>
+        </div>
+        <div class="advertisements">
+          <%= render partial: 'advertisements/adspartial', locals: {advertisements: @advertisements} %>
+        </div>
+        <% end %>
+        <% if @advertisements.next_page %>
+        <div class="col-xs-12 col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+          <a class="load-more-advertisements" data-remote="true" href="/usuarios/<%= @user.to_param %>?page=<%= @advertisements.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

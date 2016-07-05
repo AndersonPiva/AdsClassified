@@ -1,0 +1,639 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.navbar-default {
+  background-color: white;
+  padding: 5px;
+}
+nav {
+  box-shadow: 0 3px 7px #888888;
+}
+.content {
+  padding-bottom: 140px;
+}
+.btn-personal {
+  width: 210px;
+}
+.page-container {
+  padding-top: 60px;
+  min-height: 100%;
+  position: relative;
+  background-color: #F5F8FA;
+}
+.clear {
+  clear: both;
+}
+.clear-right{
+  clear: right;
+}
+.time-color {
+  background-color: #F5F8FA;
+}
+#like-button {
+  margin-top: 7px;
+}
+.modal-dialog {
+  margin-top: 160px;
+}
+#panel {
+  margin-top: 55px;
+  background-color: rgba(255, 255, 255,.60);
+}
+#carregando {
+  margin-top: 5px;
+  display: none;
+}
+.color-circle {
+  color: white;
+}
+.margin-title {
+  margin-top: 20;
+}
+#menu {
+  position: fixed;
+  top: 50%;
+  left: 83%;
+  z-index: 70;
+  padding: 0;
+  margin: 0;
+}
+#menu li {
+  display: block;
+  margin: 10px;
+  color: white;
+  background: #909EDB;
+  background: rgba(144,158,259, 0.5);
+  border-radius: 10px;
+}
+#menu li.active {
+  background: #909EDB;
+  color: #fff;
+}
+#menu li a {
+  text-decoration: none;
+  color: white;
+}
+#menu li a,
+#menu li.active a {
+  padding: 9px 18px;
+  display: block;
+}
+#menu li.active a {
+  color: #fff;
+}
+.developer-margin {
+  margin-top: 40px;
+}
+.form-margin {
+  margin-top: 30px;
+}
+#developer2-section {
+  margin-top: 30px;
+}
+.section-margin {
+  margin-bottom: 20px;
+}
+#list-cogs li {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+#img-default {
+  width: 210px;
+  height: 210px;
+}
+#area-fixed {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  padding: 5px;
+}
+#area-fixed ul {
+  margin: 0;
+  padding: 0;
+}
+#area-fixed ul li {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+#area-fixed ul li a {
+  text-decoration: none;
+  color: #355176;
+  font-weight: bold;
+}
+#area-fixed ul li:last-child {
+  color: gray;
+}
+#fixed {
+  height: auto;
+  padding: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+#fixed ul li {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+#fixed ul li:last-child {
+  color: gray;
+}
+#fixed ul li a {
+  color: white;
+  text-decoration: none;
+}
+p {
+  color: #355176;
+}
+.section p {
+  font-size: 17px;
+}
+.footer-color {
+  background-color: #355176;
+}
+.logo-margin {
+  margin-top: 20px;
+}
+.img-margin {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.panel-margin {
+  margin-top: 65px;
+}
+.banner {
+  background-image: asset-data-url("banner.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.container {
+  max-width: 100%;
+}
+.page-content {
+  margin-top: 35px;
+}
+#panel-accountconfirmed {
+  margin-top: 150px;
+  margin-bottom: 177px;
+}
+#user-image {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #DDDDDD;
+}
+.margin-inherit {
+  margin-top: -5px;
+}
+#business-icon {
+  margin-top: 40px;
+}
+#check-icon {
+  color: #909EDB;
+}
+.line-height {
+  line-height: inherit;
+}
+#message-area {
+  height: 200px;
+}
+.alert-warning {
+  background-color: white;
+  border: 1px solid #DDDDDD;
+}
+#pswd_info {
+  position: absolute;
+  left: 20%;
+  width: 60%;
+  z-index: 3;
+  top: 105px;
+  background-color: #FEFEFE;
+  border: 1px solid #DDDDDD;
+  font-size: 0.875em;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px #ccc;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  display: none;
+}
+#pswd_info::before {
+  content: "\25B2";
+  position: absolute;
+  top: -14px;
+  left: 45%;
+  font-size: 14px;
+  line-height: 14px;
+  color: #ddd;
+  text-shadow: none;
+  display: block;
+}
+.invalid {
+  background-image: asset-data-url("remove.png");
+  background-repeat: no-repeat;
+  padding-left: 22px;
+  line-height: 24px;
+  color: #ec3f41;
+}
+.valid {
+  background-image: asset-data-url("correct.png");
+  background-repeat: no-repeat;
+  padding-left: 22px;
+  line-height: 24px;
+  color: #3a7d34;
+}
+.title-color {
+  color: #355176;
+}
+.no-margin-no-padding {
+  margin: 0;
+  padding: 0;
+}
+.col-sm-personal,
+.col-md-personal,
+.col-sm-personal-more {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.margin-panel-inherit {
+  margin-top: -20px;
+}
+.no-decoration {
+  text-decoration: none;
+}
+#about-user {
+  margin-top: 10px;
+}
+#about-user h5,
+#filtercitys h5 {
+  margin: 5px;
+}
+#filtercitys {
+  clear: left;
+}
+#user-image-timeline {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #ddd;
+  margin-left: 15px;
+}
+#new-advertesiment {
+  background-color: rgba(53, 81, 118, .1);
+  height: 85px;
+}
+#new-advertesiment .col-xs-9 {
+  margin-top: 10px;
+}
+.none {
+  display: none;
+}
+#timeline {
+  clear: right;
+}
+#created_at {
+  margin-left: 10px;
+  color: #aaa;
+}
+.margin-post {
+  margin-bottom: 10px;
+}
+#div_file {
+  padding: 5px;
+  height: 120px;
+  width: 120px;
+  border: 1px dashed gray;
+  margin-bottom: 15px;
+}
+#img_prev {
+  width: 110px;
+  height: 110px;
+}
+#delete-photo {
+  position: absolute;
+  z-index: 3;
+  right: -5px;
+  top: 0;
+}
+input.btn_enviar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.margin-negative {
+  margin-left: -20px;
+}
+#price {
+  color: green;
+  margin-top: -8px;
+}
+.hide-bullets {
+  list-style: none;
+  margin-left: -40px;
+  margin-top: 10px;
+}
+#list-policy {
+  padding-left: 10px;
+}
+#margin-privacy {
+  margin-top: 40px;
+}
+#margin-privacy-icon-1 {
+  margin-top: 100px;
+}
+#margin-privacy-icon-2 {
+  margin-top: 50px;
+}
+#margin-privacy-icon-3 {
+  margin-top: 45px;
+}
+#margin-privacy-icon-4 {
+  margin-top: 140px;
+}
+#margin-privacy-icon-5 {
+  margin-top: 45px;
+}
+#toTop {
+  bottom: 10px;
+  color: #333;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  right: 10px;
+  text-align: center;
+  width: 100px;
+  display: none;
+}
+.navbar-form .form-control {
+  display: inline-block;
+}
+.navbar-form .form-control {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+}
+#navbar-form {
+  margin-top: 6px;
+  margin-left: 5px;
+}
+#list-search {
+  margin: 0;
+  padding: 0;
+}
+#list-search li {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+#list-search li:first-child {
+  margin-bottom: 5px;
+}
+#panel-account-cancel {
+  margin-top: 15px;
+  border: 0;
+  background-color: #F2F2F2;
+}
+#btn-cancel-account {
+  margin-top: 10px;
+}
+#social-connection {
+  margin-top: 20px;
+}
+#social-connection.img-thumbnail {
+  border: 0;
+  background-color: #F5F8FA;
+}
+#favouriteAdd {
+  color: red;
+}
+#list-evaluations {
+  margin-top: 30px;
+}
+#comment-evaluation {
+  margin-top: 4px;
+}
+#date-evaluation {
+  margin-top: 4px;
+  clear: both;
+}
+.starrr {
+  display: inline-block;
+}
+.starrr a {
+  font-size: 30px;
+  padding: 0 1px;
+  cursor: pointer;
+  color: #355176;
+  text-decoration: none;
+}
+#my-evaluation {
+  margin-bottom: 160px;
+}
+#evaluation-form {
+  border: 0;
+  background-color: #F2F2F2;
+}
+.comment-margin {
+  margin-top: 15px;
+}
+#media {
+  margin-top: 60px;
+  font-size: 64px;
+}
+span.stars,
+span.stars span {
+  display: inline-flex;
+  background: asset-data-url("stars.png") 0 -16px repeat-x;
+  width: 80px;
+  height: 16px;
+}
+span.stars span {
+  background-position: 0 0;
+}
+#modalEdit {
+  margin-top: 150px;
+}
+#title-reputation {
+  margin-top: -10px;
+}
+.modalEditAds{
+  margin-top: 50px;
+}
+#title-editads{
+  margin-bottom: 20px;
+}
+
+#advertisement-price{
+  display: inline-block;
+  margin: 0;
+  padding: 10px;
+  width: auto;
+  background-color: #355176;
+  color: white;
+}
+
+.panel-message-advertisement{
+  background-color: #F2F2F2;
+  border-radius: 4px;
+  border: 1px solid #D0D0D0;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  margin-top: 20px;
+}
+.margin-message{
+  margin-top: 20px;
+}
+.ads-location{
+  margin: 0;
+  padding-left: 16px;
+}
+.margin-options{
+  margin-bottom: 5px;
+}
+#panel-options{
+  background-color: #F2F2F2;
+}
+#modalEditAdsShow{
+  margin-top: 20px;
+}
+#panel-security{
+  margin-top: 20px;
+}
+.btn-whatsapp{
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  background-color: #2CB742;
+  border-radius: 4px;
+  border: 1px solid #1BA042;
+}
+@media (min-width: 768px) {
+  #menu {
+    left: 90%;
+  }
+  #like-button {
+    margin-top: 30px;
+  }
+  .margin-title {
+    margin-top: 40px;
+  }
+  .navbar-default {
+    height: 60px;
+  }
+  #developer2-section {
+    float: right;
+  }
+  #developer2-section1 h3,
+  #developer2-section1 p {
+    float: right;
+  }
+  .section-margin {
+    margin-top: 30px;
+  }
+  .col-sm-personal {
+    float: left;
+    margin-left: 10px;
+    width: 48.61%;
+  }
+  .col-sm-personal-more {
+    float: left;
+    margin-left: 10px;
+    width: 73.61%;
+  }
+  .stars {
+    margin-top: 20px;
+  }
+  #stars-center {
+    margin-top: -30px;
+  }
+  #media {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-offset-personal {
+    margin-left: 29%;
+  }
+  #panel-accountconfirmed {
+    margin-top: 180px;
+  }
+  #menu {
+    left: 92%;
+  }
+  #fixed {
+    margin-top: 10px;
+    height: 50px;
+    padding: 15px;
+  }
+  #fixed ul li {
+    display: inline-block;
+    width: auto;
+    float: left;
+    margin-right: 30px;
+  }
+  #fixed ul li:last-child {
+    float: right;
+    margin-right: 0;
+  }
+  #area-fixed {
+    margin-top: 10px;
+    height: 50px;
+    padding: 15px;
+  }
+  #area-fixed ul li {
+    display: inline-block;
+    width: auto;
+    float: left;
+    margin-right: 30px;
+  }
+  #area-fixed ul li:last-child {
+    float: right;
+    margin-right: 0;
+  }
+  .content {
+    padding-bottom: 50px;
+  }
+  .section-margin {
+    margin-top: 0;
+  }
+  .col-md-personal {
+    margin-left: 10px;
+    float: left;
+    width: 65.6%;
+  }
+  .panel-message-advertisement{
+    margin-top: 0;
+  }
+  #dont-image{
+    margin-top: 200px;
+  }
+  #panel-security{
+    margin-top: 0;
+  }
+  #image-dont{
+    margin-top: 70px;
+  }
+}
+@media (min-width: 1200px) {
+  #menu {
+    left: 94%;
+  }
+  #date-evaluation {
+    margin-left: 15px;
+    clear: none;
+    margin-top: 0;
+  }
+}

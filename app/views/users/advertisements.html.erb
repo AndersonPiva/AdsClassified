@@ -1,0 +1,40 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="col-xs-12">
+        <div class="panel-body">
+          <h1 class="text-uppercase title-color hidden-xs">anúncios</h1>
+          <h4 class="text-uppercase title-color visible-xs">anúncios</h4>
+          <% if @advertisements.blank? %>
+          <div class="panel panel-default col-xs-12 page-content">
+            <div class="panel-body">
+              <% if current_user.present? && current_user.id == @user.id %>
+              <h4 class="title-color">Você ainda não postou nenhum anúncio
+                <i class="fa fa-thumbs-o-down"></i>.</h4>
+              <h4 class="title-color">Comece
+                <a href="/usuarios/<%= @user.to_param %>/timeline">agora mesmo</a>
+                a publicar anúncios de seus produtos e serviços.</h4>
+              <% else %>
+              <h4 class="title-color">Este usuário ainda não postou nenhum anúncio.</h4>
+              <% end %>
+            </div>
+          </div>
+          <% else %>
+          <div class="page-content">
+          <div class="advertisements">
+            <%= render partial: 'advertisements/adspartial', locals: {advertisements: @advertisements} %>
+          </div>
+          <% end %>
+          <% if @advertisements.next_page %>
+          <div class="col-xs-12 col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+            <a class="load-more-advertisements" data-remote="true" href="/usuarios/<%= @user.to_param%>/anuncios?page=<%= @advertisements.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+          </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

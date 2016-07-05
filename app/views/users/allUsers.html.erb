@@ -1,0 +1,20 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <h1 class="text-uppercase title-color hidden-xs">usuários</h1>
+      <h4 class="text-uppercase title-color visible-xs">usuários</h4>
+      <div class="page-content">
+        <div class="users">
+            <%= render partial: 'users/userpartial', locals: {users: @users} %>
+        </div>
+      </div>
+      <% if @users.next_page %>
+      <div class="col-xs-12 col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+        <a class="load-more-advertisements" data-remote="true" href="/usuarios?page=<%= @users.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

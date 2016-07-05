@@ -1,0 +1,38 @@
+<%= form_for(@contact) do |f| %>
+<%= error_messages(@contact) %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="col-xs-12 title-color" for="name">Seu nome:</label>
+        <div class="col-xs-10 col-sm-6">
+          <%= f.text_field :name, :placeholder => 'Digite seu nome', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 title-color" for="email">Seu e-mail</label>
+        <div class="col-xs-10 col-sm-6">
+          <%= f.text_field :email, :placeholder => 'Digite seu e-mail', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 title-color" for="subject">Assunto:</label>
+        <div class="col-xs-10 col-sm-6">
+          <%= f.text_field :subject, :placeholder => 'Digite o assunto', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 title-color" for="message">Sua mensagem:</label>
+        <div class="col-xs-12">
+          <%= f.text_area :message, :placeholder => 'Digite sua mensagem', id: 'message-area', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <button class="btn btn-primary" type="submit">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,62 @@
+<div class="panel panel-default col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 margin-post">
+  <div class="panel-body">
+    <a href="/usuarios/<%= evaluation.evaluator.user.to_param%>" title="Ver perfil">
+      <%= image_tag evaluation.evaluator.user.image, class: 'img-thumbnail pull-left' %>
+      <div class="col-xs-8">
+        <h5 class="no-margin-no-padding title-color pull-left">
+          <strong><%= evaluation.evaluator.user.name %></strong>
+        </h5>
+      </a>
+      <h5 class="title-color no-margin-no-padding pull-left" id="date-evaluation"><%= l(evaluation.created_at, format: '%d de %B %Y') %></h5>
+      <% if current_user.present? %>
+      <% if current_user.id == evaluation.evaluator.user.id %>
+      <div class="btn-group pull-right">
+        <button aria-expanded="false" aria-haspopup="true" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" type="button">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a data-target="#modalEdit" data-toggle="modal" href="">
+              <i class="fa fa-pencil"></i>
+              Editar
+            </a>
+          </li>
+          <li>
+            <%= link_to ' Deletar', evaluation, class: 'fa fa-remove', method: :delete, data: {confirm: "Tem certeza?"} %>
+          </li>
+        </ul>
+      </div>
+      <% end %>
+      <% end %>
+      <h5 class="title-color clear no-margin-no-padding stars">
+        <% if evaluation.star == 5 %>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <% elsif evaluation.star == 4%>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <% elsif evaluation.star == 3 %>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <% elsif evaluation.star == 2 %>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <% else %>
+        <i class="fa fa-star"></i>
+        <% end %>
+      </h5>
+      <p class="clear" id="comment-evaluation">
+        <%= evaluation.comment %>
+      </p>
+    </div>
+    <div class="modal fade" id="modalEdit" role="dialog">
+      <%= render partial: 'evaluations/form', locals: {:@evaluation => evaluation} %>
+    </div>
+  </div>
+</div>

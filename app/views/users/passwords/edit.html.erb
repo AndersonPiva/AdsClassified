@@ -1,0 +1,82 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="panel panel-default col-xs-12 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-personal panel-margin">
+        <div class="panel-body">
+          <div class="text-center">
+            <h4 class="title-color">
+              <strong>Defina uma nova Senha</strong>
+            </h4>
+            <img alt="password-recovery" class="img-circle img-margin" src="/assets/password-recovery.jpg"/>
+          </div>
+          <p>
+            <strong>Dica:</strong>
+            escolha uma senha forte, composta por letras, números, pontuações e no mínimo 6 caracteres.
+            <a class="btn btn-default btn-xs" data-target="#myModal" data-toggle="modal" title="Dúvidas">
+              <i class="fa fa-question"></i>
+            </a>
+          </p>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+          <%= f.hidden_field :reset_password_token %>
+          <div class="form-group input-group">
+            <label class="input-group-addon" for="new-password">
+              <i class="fa fa-lock"></i>
+            </label>
+            <%= f.password_field :password, autofocus: true, autocomplete: "off", :placeholder => 'Digite sua nova senha', class:'form-control' %>
+          </div>
+          <div class="form-group input-group">
+            <label class="input-group-addon" for="new-password-confirmable">
+              <i class="fa fa-refresh"></i>
+            </label>
+            <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => 'Confirme sua nova senha', class:'form-control' %>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Alterar Senha</button>
+          </div>
+          <% end %>
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal" type="button">&times;</button>
+                  <h4 class="modal-title">
+                    <strong>Segurança em primeiro lugar</strong>
+                  </h4>
+                </div>
+                <div class="modal-body">
+                  <p>No momento em que você criar ou alterar sua senha é importante seguir as seguintes dicas:</p>
+                  <ul>
+                    <li>
+                      Evitar incluir nome ou sobrenome na mesma.
+                    </li>
+                    <li>
+                      Evitar utilizar dados particulares, como número de telefone e data de nascimento.
+                    </li>
+                    <li>
+                      Incluir caracteres numéricos.
+                    </li>
+                    <li>
+                      Alternar entre letras maiúsculas e minúsculas.
+                    </li>
+                    <li>
+                      Possuir um tamanho de no mínimo de 6 caracteres.
+                    </li>
+                    <li>
+                      É de suma importância que cada nova senha seja distinta das anteriores.
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">Ok</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

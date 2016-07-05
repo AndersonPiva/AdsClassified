@@ -1,0 +1,42 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="col-xs-12">
+        <div class="panel-body">
+          <h1 class="text-uppercase title-color">seguindo</h1>
+          <div class="page-content">
+            <% if @followings.blank? %>
+            <div class="panel panel-default col-xs-12">
+              <div class="panel-body">
+                <% if !current_user.present? || current_user.id != @user.id  %>
+                  <h4 class="title-color">Este usuário ainda não segue ninguem.</h4>
+                <% else %>
+                <h4 class="title-color">Você ainda não segue ninguém
+                  <i class="fa fa-thumbs-o-down"></i>.
+                </h4>
+                <h4 class="title-color">Não perca tempo! Clique
+                  <a href="/usuarios">aqui</a>
+                  e comece agora mesmo a procurar anunciantes de seu interesse
+                  <i class="fa fa-thumbs-o-up"></i>.
+                </h4>
+                <% end %>
+              </div>
+            </div>
+            <% else %>
+              <div class="advertisements">
+                <%= render partial: 'users/userpartial', locals: {users: @followings} %>
+              </div>
+            <% end %>
+            <% if @followings.next_page %>
+            <div class="col-xs-12 col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+              <a class="load-more-advertisements" data-remote="true" href="/usuarios/<%= @user.to_param %>/seguindo?page=<%= @followings.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

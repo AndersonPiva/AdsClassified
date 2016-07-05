@@ -1,0 +1,45 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="col-xs-12 col-sm-6">
+          <div class="text-center">
+            <h2 class="title-color no-margin-no-padding"><strong>Sua rede social de classificados do oeste catarinense!</strong></h2>
+            <h4 class="title-color">
+              Temos <big><strong><%= @total_anuncios %></strong></big> anúncios hoje.
+            </h4>
+            <img alt="social-network-connection" src="/assets/trace-user.png" class="img-thumbnail" id="social-connection">
+          </div>
+        </div>
+        <div class="col-xs-12 visible-xs">
+          <hr/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <div class="text-center">
+            <h4 class="title-color"><strong>Encontre tudo o mais próximo de você!</strong></h4>
+            <p class="page-content">
+              <i class="fa fa-angle-double-down fa-5x"></i>
+            </p>
+            <img alt="map" src="/assets/map.png" class="img-thumbnail" id="social-connection"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <hr/>
+        <div class="text-center">
+          <h4 class="title-color">Escolha sua cidade:</h4>
+          <% @cities.each do |city| %>
+            <h5><a href="/anuncios/cidade/<%= city.to_param %>"><i class="fa fa-map-marker"></i> <%= city.name %></a></h5>
+          <% end %>
+        </div>
+      </div>
+      <div id="toTop" class="hidden-xs">
+        <a class="title-color" href="">
+          <i class="fa fa-angle-double-up fa-5x" title="Voltar ao Topo"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

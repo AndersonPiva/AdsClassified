@@ -1,0 +1,80 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container banner">
+  <div class="content">
+    <div class="container">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="panel panel-default col-xs-12 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-personal" id="panel">
+        <div class="panel-body">
+          <div class="text-center">
+            <h4 class="title-color">
+              <strong>Entrar no Grande Oeste Classificados</strong>
+            </h4>
+            <img alt="user-circle" class="img-margin" src="/assets/user-circle.png"/>
+          </div>
+          <% if alert %>
+          <p class="alert alert-danger">
+            <%= alert %>
+          </p>
+          <% end %>
+          <div class="form-group input-group">
+            <label class="input-group-addon" for="email">
+              <i class="fa fa-envelope"></i>
+            </label>
+            <%= f.email_field :email, autofocus: true, :placeholder => 'E-mail', class: 'form-control' %>
+          </div>
+          <div class="form-group input-group">
+            <label class="input-group-addon" for="password">
+              <i class="fa fa-lock"></i>
+            </label>
+            <%= f.password_field :password, autocomplete: "off", :placeholder => 'Senha', class:'form-control' %>
+          </div>
+          <%= f.check_box :remember_me %>
+          <label class="title-color">Lembrar-me</label>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+          </div>
+          <div class="help-block text-center">
+            <a class="btn btn-block btn-social btn-facebook" href="/users/auth/facebook" id="load">
+              <i class="fa fa-facebook"></i>
+              Entrar usando o Facebook</a>
+            <div class="text-center" id="carregando">
+              <img src="/assets/loader.gif"/>
+              <span>
+                <small>Carregando...</small>
+              </span>
+            </div>
+          </div>
+          <div class="help-block text-center">
+            <%= link_to 'Esqueci minha senha', new_password_path(resource_name) %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <footer id="area-fixed">
+    <div class="container">
+      <ul class="list-unstyled">
+        <li>
+          <a href="/sobre">Sobre</a>
+        </li>
+        <li>
+          <a href="/contato">Contato</a>
+        </li>
+        <li>
+          <a href="/ajuda">Ajuda</a>
+        </li>
+        <li>
+          <a href="/politica_de_privacidade">Politica de Privacidade</a>
+        </li>
+        <li>
+          <a href="#">Termos de Uso</a>
+        </li>
+        <li>
+          <span>Grande Oeste Classificados © 2016
+          </span>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,19 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="panel panel-default col-xs-12 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-personal panel-color panel-margin" id="panel-accountconfirmed">
+        <div class="panel-body">
+          <div class="text-center">
+            <i class="fa fa-check fa-5x" id="check-icon"></i>
+            <p>
+              Você já confirmou a sua conta, acesse-a clicando
+              <%= link_to 'aqui', new_user_session_path %>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

@@ -1,0 +1,12 @@
+$('.advertisements').append(' <%= escape_javascript(render partial: "advertisements/adspartial", locals: {advertisements: @allAds}) %>')
+$('a.load-more-advertisements').attr('href', '/usuarios/<%= @user.to_param %>?page=<%= @allAds.next_page %>');
+
+<%unless @allAds.next_page %>
+$('a.load-more-advertisements').remove();
+$('.remove').remove;
+<% end %>
+
+<%unless @followings_ads.next_page %>
+$('a.load-more-advertisements').remove();
+$('.remove').remove;
+<% end %>

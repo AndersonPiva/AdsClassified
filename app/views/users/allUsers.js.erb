@@ -1,0 +1,7 @@
+$('.users').append(' <%= escape_javascript(render partial: "users/userpartial", locals: {users: @users}) %>')
+$('a.load-more-advertisements').attr('href', '/usuarios?page=<%= @users.next_page %>');
+
+<%unless @users.next_page %>
+$('a.load-more-advertisements').remove();
+$('.remove').remove;
+<% end %>

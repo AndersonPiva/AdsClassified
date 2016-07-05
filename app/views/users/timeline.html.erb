@@ -1,0 +1,137 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="panel panel-default col-xs-12 col-sm-6 col-md-4 pull-left margin-post">
+          <div class="panel-body">
+            <div class="text-center">
+              <% if @user.uid.present? %>
+              <a href="/usuarios/<%= @user.to_param %>">
+                <%= image_tag "http://graph.facebook.com/#{@user.uid}/picture?type=large", class: 'img-thumbnail' %>
+                <h4 class="title-color">
+                  <strong><%= @user.name %></strong>
+                </h4>
+              </a>
+              <% else %>
+              <%= image_tag @user.image.url, :id => 'img-default', class: 'img-thumbnail' %>
+              <% if @user.name.present? %>
+              <h4 class="title-color">
+                <strong><%= @user.name %></strong>
+              </h4>
+              <% else %>
+              <h4 class="title-color">
+                <strong><%= @user.username %></strong>
+              </h4>
+              <% end %>
+              <% end %>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="/usuarios/<%= @user.to_param %>/anuncios">
+                <h5>Anúncios</h5>
+                <h4 class="title-color">
+                  <strong><%= @user.advertisements.size %></strong>
+                </h4>
+              </a>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="/usuarios/<%= @user.to_param %>/seguidores">
+                <h5>Seguidores</h5>
+                <h4 class="title-color">
+                  <strong><%= @user.followers_count %></strong>
+                </h4>
+              </a>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="/usuarios/<%= @user.to_param %>/seguindo">
+                <h5>Seguindo</h5>
+                <h4 class="title-color">
+                  <strong><%= @user.follow_count %></strong>
+                </h4>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default col-xs-12 visible-xs">
+          <div class="panel-body">
+            <div class="text-center">
+              <h5 class="title-color">
+                <i class="fa fa-filter"></i>
+                Filtre os anúncios da sua timeline por cidade:</h5>
+                <% @cities.each do |city| %>
+                  <h5><a href="/anuncios/cidade/<%= city.to_param %>"><i class="fa fa-map-marker"></i> <%= city.name %></a></h5>
+                <% end %>
+            </div>
+          </div>
+        </div>
+        <%= render partial: 'advertisements/form', locals: {:@advertisement => Advertisement.new} %>
+        <div id="filtercitys" class="panel panel-default col-sm-6 col-md-4 hidden-xs pull-left">
+          <div class="panel-body">
+            <div class="text-center">
+              <h5 class="title-color">
+                <i class="fa fa-filter"></i>
+                Filtre os anúncios da sua timeline por cidade:</h5>
+              <% @cities.each do |city| %>
+                <h5><a href="/anuncios/cidade/<%= city.to_param %>"><i class="fa fa-map-marker"></i> <%= city.name %></a></h5>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-personal col-md-personal">
+          <ul class="list-unstyled nav nav-pills nav-justified margin-post" id="list-timeline">
+            <li class="active">
+              <a href="#allAds" data-toggle="tab">Todos Anúncios</a>
+            </li>
+            <li>
+              <a href="#followingsads" data-toggle="tab">Seguindo</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="allAds">
+            <% if @allAds.blank? %>
+              <div class="panel panel-default col-xs-12 col-sm-personal col-md-personal pull-right margin-post">
+                <div class="panel-body">
+                  <h4 class="title-color">Infelizmente não temos nenhum anúncio para hoje <i class="fa fa-thumbs-o-down"></i>.</h4>
+                </div>
+              </div>
+            <% else %>
+            <div class="advertisements">
+              <%= render partial: 'advertisements/adspartial', locals: {advertisements: @allAds} %>
+            </div>
+            <% end %>
+            <% if @allAds.next_page %>
+            <div class="col-xs-12 col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+              <a class="load-more-advertisements" data-remote="true" href="/usuarios/<%= @user.to_param %>/timeline?page=<%= @allAds.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+            </div>
+            <% end %>
+          </div>
+          <div class="tab-pane" id="followingsads">
+            <% if @followings_ads.blank? %>
+              <div class="panel panel-default col-xs-12 col-sm-personal col-md-personal pull-right margin-post">
+                <div class="panel-body">
+                  <% if @user.follow_count == 0 %>
+                    <h4 class="title-color">Você ainda não segue ninguém. Clique <a href="/usuarios">aqui</a> e comece agora a mesmo a procurar por aunciantes do seu interesse <i class="fa fa-thumbs-o-up"></i> .</h4>
+                  <% else %>
+                    <h4 class="title-color">Infelizmente os anunciantes seguidos ainda não postaram nenhum anúncio <i class="fa fa-thumbs-o-down"></i>.</h4>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+            <% carousel_index = 0 %>
+            <div class="advertisements">
+              <%= render partial: 'advertisements/adspartial', locals: {advertisements: @followings_ads} %>
+            </div>
+            <% end %>
+            <% if @followings_ads.next_page %>
+            <div class="col-sm-personal col-md-personal margin-post pull-right text-center remove" id="timeline">
+              <a class="load-more-advertisements" data-remote="true" href="/usuarios/<%= @user.to_param %>/timeline?page=<%= @allAds.next_page %>"><image alt="carregando" src="/assets/load.gif"></image></a>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>
