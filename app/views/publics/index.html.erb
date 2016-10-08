@@ -29,7 +29,22 @@
         <hr/>
         <div class="text-center">
           <h4 class="title-color">Escolha sua cidade:</h4>
-          <% @cities.each do |city| %>
+        </div>
+        <div class="col-xs-4 text-center">
+          <h4 class="title-color"><strong>Microrregião de Concórdia</strong></h4>
+          <% @cities_concordia.each do |city| %>
+            <h5><a href="/anuncios/cidade/<%= city.to_param %>'"><i class="fa fa-map-marker"></i> <%= city.name %></a></h5>
+          <% end %>
+        </div>
+        <div class="col-xs-4 text-center">
+          <h4 class="title-color"><strong>Microrregião de Chapecó</strong></h4>
+          <% @cities_chapeco.each do |city| %>
+            <h5><a href="/anuncios/cidade/<%= city.to_param %>"> <i class="fa fa-map-marker"></i> <%= city.name %></a></h5>
+          <% end %>
+        </div>
+        <div class="col-xs-4 text-center">
+          <h4 class="title-color">Microrregião de Xanxerê</h4>
+          <% @cities_xanxere.each do |city| %>
             <h5><a href="/anuncios/cidade/<%= city.to_param %>"><i class="fa fa-map-marker"></i> <%= city.name %></a></h5>
           <% end %>
         </div>
