@@ -1,0 +1,73 @@
+<%= render 'publics/navbarpublics' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="panel panel-default col-xs-12 page-content">
+        <div class="panel-body">
+          <h2 class="no-margin-no-padding">Caixa de Entrada</h2>
+          <h4>Leia todas as suas mensagens recebidas.</h4>
+          <% if @total_messages == 0 %>
+          <h5 class="page-content">Você ainda não recebeu nenhuma mensagem.
+            <i class="fa fa-thumbs-down-o"></i>
+          </h5>
+          <% else %>
+          <div class="table-responsive page-content">
+            <h5>Você tem um total de
+              <%= @total_messages %>
+              recebida(s).</h5>
+              <h5>Você tem <%= @total_messages_no_read %> nova(s) mensagens.</h5>
+            <table class="table table-hover">
+              <tr>
+                <td class="text-center">
+                  <strong>De</strong>
+                </td>
+                <td class="text-center">
+                  <strong>Data</strong>
+                </td>
+                <td class="text-center">
+                  <strong>Opções</strong>
+                </td>
+              </tr>
+              <% @messages.each do |message| %>
+              <% if message.status == "nao lida" %>
+              <tr id="row-no-read">
+                <td class="text-center">
+                  <strong>
+                    <a href="/usuarios/<%= message.sender.user.to_param %>"><%= message.sender.user.name %></a>
+                  </strong>
+                </td>
+                <td class="text-center">
+                  <a href="/usuarios/<%= @user.to_param %>/mensagens/<%= message.id %>" title="Clique para visualizar a mensagem">
+                    <strong><%= l(message.created_at, format: "%d/%m/%Y") %></strong>
+                  </a>
+                </td>
+                <td class="text-center">
+                  <a class="btn btn-primary btn-xs fa fa-eye" href="/mensagens/marcarcomolida/<%= message.id %>" title="Marcar como lida"></a>
+                  <%= link_to '', message, title: 'Excluir' , class: 'btn btn-danger btn-xs fa fa-remove', method: :delete %>
+                </td>
+              </tr>
+              <% else %>
+              <tr>
+                <td class="text-center">
+                  <a href="/usuarios/<%= message.sender.user.to_param %>"><%= message.sender.user.name %></a>
+                </td>
+                <td class="text-center">
+                  <a href="/usuarios/<%= @user.to_param %>/mensagens/<%= message.id %>" title="Clique para visualizar a mensagem">
+                    <%= l(message.created_at, format: "%d/%m/%Y") %>
+                  </a>
+                </td>
+                <td class="text-center">
+                  <%= link_to '', message, title: 'Excluir' , class: 'btn btn-danger btn-xs fa fa-remove', method: :delete %>
+                </td>
+              </tr>
+              <% end %>
+              <% end %>
+            </table>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'publics/footerpublics' %>
+</div>

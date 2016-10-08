@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   match '/contato', to: 'contacts#new', via: [:get]
   match '/ajuda', to: 'publics#callcenter', via: [:get]
   match '/politica_de_privacidade', to: 'publics#privacy', via: [:get]
+  match '/usuarios/:id/mensagens', to: 'users#messages', via: [:get]
+  match '/usuarios/:id/mensagens/:id', to: 'messages#show', via: [:get]
+  match '/mensagens/marcarcomolida/:id', to: 'messages#marck_like_read', via: [:get]
   root 'publics#index'
 end

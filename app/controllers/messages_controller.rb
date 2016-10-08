@@ -1,9 +1,25 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
+  def show
+    @message = Message.find(params[:id])
+  end
+
+  def marck_like_read
+    if current_user.present?
+      message = Message.find(params[:id])
+      message.status = "lida"
+      message.save
+      redirect_to "/usuarios/#{current_user.to_param}/mensagens"
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
   def create
     @message = Message.new(message_params)
     @message.sender_id = current_user.sender.id
+    @message.status = "nao lida"
     if @message.sender.user.id == @message.receiver.user.id
       redirect_to :back
     else
@@ -45,6 +61,6 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:name, :email, :phone, :comment, :receiver_id, :sender_id)
+      params.require(:message).permit(:name, :email, :phone, :comment, :receiver_id, :sender_id, :status)
     end
 end

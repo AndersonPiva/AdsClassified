@@ -142,4 +142,16 @@ class UsersController < ApplicationController
       format.js
     end
   end
+
+  ## messages
+  def messages
+    if current_user.present?
+      @user = User.find(params[:id])
+      @messages = @user.receiver.messages.order("created_at DESC")
+      @total_messages = @messages.size
+      @total_messages_no_read = @messages.where(status: "nao lida").size
+    else
+      redirect_to new_user_session_path
+    end
+  end
 end
