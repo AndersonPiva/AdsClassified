@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   def show
-    @message = Message.find(params[:id])
+    @message_show = Message.find(params[:id])
   end
 
   def marck_like_read
@@ -11,6 +11,17 @@ class MessagesController < ApplicationController
       message.status = "lida"
       message.save
       redirect_to "/usuarios/#{current_user.to_param}/mensagens"
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
+  def read
+    if current_user.present?
+      @message = Message.find(params[:id])
+      @message.status = "lida"
+      @message.save
+      redirect_to "/usuarios/#{current_user.to_param}/mensagens/#{@message.id}"
     else
       redirect_to new_user_session_path
     end

@@ -1,10 +1,10 @@
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-  :address              =>  'smtp.gmail.com',
-  :port                 =>  '587',
-  :authentication       =>  :plain,
-  :user_name            =>  'lifehealthyyy@gmail.com',
-  :password             =>  '1113aabb',
-  :domain               =>  'gmail.com',
-  :enable_starttls_auto  =>  true
+ :user_name => 'PivaAnderson',
+ :password => 'shark123456789',
+ :domain => 'sendgrid.net',
+ :address => 'smtp.sendgrid.net',
+ :port => 587,
+ :authentication => :plain,
+ :enable_starttls_auto => true
 }

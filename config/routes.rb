@@ -29,5 +29,6 @@ Rails.application.routes.draw do
   match '/usuarios/:id/mensagens', to: 'users#messages', via: [:get]
   match '/usuarios/:id/mensagens/:id', to: 'messages#show', via: [:get]
   match '/mensagens/marcarcomolida/:id', to: 'messages#marck_like_read', via: [:get]
+  match '/mensagens/lida/:id', to: 'messages#read', via: [:get]
   root 'publics#index'
 end

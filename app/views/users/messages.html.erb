@@ -6,12 +6,32 @@
         <div class="panel-body">
           <h2 class="no-margin-no-padding">Caixa de Entrada</h2>
           <h4>Leia todas as suas mensagens recebidas.</h4>
-          <% if @total_messages == 0 %>
-          <h5 class="page-content">Você ainda não recebeu nenhuma mensagem.
-            <i class="fa fa-thumbs-down-o"></i>
+          <% if flash[:notice] != nil %>
+          <div class="alert alert-warning alert-dismissible page-content" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Por favor em caso de busca digite algo na caixa de pesquisa.</strong>
+          </div>
+          <% end %>
+          <div class="col-xs-12 col-sm-8 col-sm-offset-2 page-content">
+            <%= form_tag "/usuarios/#{current_user.to_param}/mensagens", method: :get do %>
+              <div class="form-horizontal">
+                <div class="form-group col-xs-10">
+                    <%= text_field_tag :query, params[:query], :placeholder => 'Digite uma parte da mensagem que está procurando', class: 'input-lg form-control' %>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg" title="Pesquisar"><i class="fa fa-search"></i></button>
+            <% end %>
+          </div>
+          <% if @total_messages == 0 && params[:query].present? %>
+          <h5 class="page-content col-xs-12">Nenhuma mensagem foi encontrada.
+            <i class="fa fa-thumbs-o-down"></i>
+          </h5>
+          <% elsif @total_messages == 0 %>
+          <h5 class="page-content col-xs-12">Você ainda não recebeu nenhuma mensagem.
+            <i class="fa fa-thumbs-o-down"></i>
           </h5>
           <% else %>
-          <div class="table-responsive page-content">
+          <div class="table-responsive page-content col-xs-12">
             <h5>Você tem um total de
               <%= @total_messages %>
               recebida(s).</h5>
@@ -37,7 +57,7 @@
                   </strong>
                 </td>
                 <td class="text-center">
-                  <a href="/usuarios/<%= @user.to_param %>/mensagens/<%= message.id %>" title="Clique para visualizar a mensagem">
+                  <a href="/mensagens/lida/<%= message.id %>" title="Clique para visualizar a mensagem">
                     <strong><%= l(message.created_at, format: "%d/%m/%Y") %></strong>
                   </a>
                 </td>
@@ -57,7 +77,7 @@
                   </a>
                 </td>
                 <td class="text-center">
-                  <%= link_to '', message, title: 'Excluir' , class: 'btn btn-danger btn-xs fa fa-remove', method: :delete %>
+                  <%= link_to '', message, title: 'Excluir' , class: 'btn btn-danger btn-xs fa fa-remove', method: :delete, data: {confirm: "Tem certeza?"} %>
                 </td>
               </tr>
               <% end %>

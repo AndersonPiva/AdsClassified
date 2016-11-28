@@ -2,7 +2,46 @@
 <div class="page-container">
   <div class="content">
     <div class="container">
-
+      <div class="panel panel-default col-xs-12 col-sm-8 col-sm-offset-2 page-content">
+        <div class="panel-body">
+          <a class="btn btn-primary" href="/usuarios/<%= current_user.to_param %>/mensagens">
+            <i class="fa fa-envelope"></i>
+            Caixa de Entrada</a>
+          <a class="btn btn-success" data-target="#myModal" data-toggle="modal">
+            <i class="fa fa-reply"></i>
+            Responder</a>
+          <%= link_to '<i class="fa fa-remove"> </i> Excluir'.html_safe, @message_show, class: 'btn btn-danger', method: :delete, data: {confirm: "Tem certeza?"} %>
+          <div class="text-center">
+            <h3>De:
+              <%= @message_show.sender.user.name %></h3>
+            <h3 class="no-margin-no-padding">Em:
+              <%= l(@message_show.created_at, format: "%d/%m/%Y %H:%M") %></h3>
+            <%= image_tag @message_show.sender.user.image, class: 'img-circle img-thumbnail', id: 'message-image' %>
+            <h3>Mensagem:</h3>
+            <p>
+              <%= @message_show.comment %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Resposta para <%= @message_show.sender.user.name %></h4>
+            </div>
+            <div class="modal-body">
+              <%= simple_form_for(@message) do |f| %>
+              <%= f.error_notification %>
+              
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <%= render 'publics/footerpublics' %>

@@ -21,7 +21,7 @@
         </div>
     <% else %>
     <a href="/usuarios/<%= user.to_param %>" title="Ver perfil">
-        <%= image_tag user.image %>
+        <%= image_tag user.image, class: 'img-thumbnail', id: 'user-profile-photo' %>
         <div class="col-xs-8 col-sm-9 col-lg-10 pull-right">
           <div class="margin-negative">
             <h4 class="title-color no-margin-no-padding pull-left"><strong><%= user.name %></strong></h4>
